@@ -77,7 +77,7 @@ type OpenAIResponse struct {
 	Choices []OpenAIResponseChoice `json:"choices"`
 }
 
-/** Create struct for openAI response choice.  Example:
+/** Struct for openAI response choice. Example:
   "text": " there was a girl who",
   "index": 0,
   "logprobs": null,
@@ -96,32 +96,22 @@ type UserResponseParams struct {
 
 func OpenAISubmitWithTemp(submission OpenAISubmission, heatIndex int) OpenAIResponse {
 	submission.Temperature = float64(heatIndex) * .2
-	//fmt.Printf("Temperature was %f\n", submission.Temperature)
 	return OpenAISubmit(submission)
 }
 
 // OpenAISubmit Marshalls an OpenAISubmission into JSON, submits it to the OpenAPI Rest Endpoint, unmarshalls it into an OpenAIResponse object
 func OpenAISubmit(submission OpenAISubmission) OpenAIResponse {
-	//println("Submission: " + submission.Prompt)
 	payloadBuffer := new(bytes.Buffer)
 	json.NewEncoder(payloadBuffer).Encode(submission)
-	//println("Payload: " + payloadBuffer.String())
 	req, _ := http.NewRequest("POST", OpenAPIEndpoint, payloadBuffer)
-	// Prepare the request
-	// Create a new request using http
-	// add the content-type header to application/json
 	req.Header.Set("Content-Type", "application/json")
-	// add api key to the request header
 	req.Header.Set("Authorization", "Bearer "+api_key)
-	// Send the request to the API
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		panic(err)
 	}
-	//fmt.Println("response Status:", resp.Status)
 	defer resp.Body.Close()
-	// Read the content into a byte array
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		panic(err)
@@ -146,7 +136,6 @@ func main() {
 		//scope      = flag.String("plugins", "", "Which scope(s) to use such as 'Metasploit' or 'Kubernetes,Docker'")
 	)
 	flag.Parse()
-	//println(*context, *promptString, *plugins)
 	args := os.Args[1:]
 	prompt := strings.Join(args, " ")
 
@@ -167,14 +156,12 @@ func main() {
 		MainMenu(submission)
 		return
 	}
-	//println(submission.Prompt)
+
 	// Submit the OpenAISubmission object to the OpenAPI Endpoint
 	if len(args) > 0 {
 		response := OpenAISubmit(submission)
 		fmt.Println(response.Choices[0].Text)
 	}
-	// Print the response
-
 }
 
 func MainMenu(sub OpenAISubmission) error {
@@ -214,7 +201,6 @@ func MainMenu(sub OpenAISubmission) error {
 				selectables[response.Choices[0].Text] = idx
 			}
 			//println(selectables[response.Choices[0].Text])
-			//fmt.Printf("Index was %d and yielded %s\n", idx, response.Choices[0].Text)
 		}(i)
 	}
 	wg.Wait()
@@ -249,19 +235,13 @@ func MainMenu(sub OpenAISubmission) error {
 	case "Execute":
 		{
 			out, err := exec.Command(os.Getenv("SHELL"), "-c", value).CombinedOutput()
-			//stdout, err := cmd.Output()
 			println(string(out))
-			//err = cmd.Run()
 			if err != nil {
 				println("Error with commanding " + err.Error())
 				return err
 			}
 		}
 	}
-
-	//println(result)
-	//response := OpenAISubmit(sub)
-	//fmt.Println(response.Choices[0].Text)
 	return nil
 }
 
