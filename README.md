@@ -31,7 +31,7 @@
 
 ## Overview
 
-This project, released one month after the OG GPT-3 (davinci-codex:2020-05-03), demonstrates early adoption and innovative use of OpenAI's GPT models to create an AI-powered shell assistant. There were no existing libraries or types, so everything is custom. This project showcases a forward-thinking approach to leveraging generative AI for practical applications, long before it became mainstream. The long-deprecated, and finnicky davinci-codex:2020-05-03 model was expertly crafted to not only spit out quality guidance, but generate fully-executable commands which it could execute with a single button. In an extraordinary twist, the generated response typically went out of its way to make the output human-friendly without asking.
+This project, released one month after the OG GPT-3 (davinci-codex:2020-05-03), demonstrates early adoption and innovative use of OpenAI's GPT models to create an AI-powered shell assistant. There were no existing libraries or types, so everything is custom. This project showcases forward-thinking to solve enterprise problems, effectively and at scale, with generative AI long before it became mainstream. The finnicky davinci-codex:2020-05-03 model was carefully crafted to generate fully-executable commands which it could execute with a single button. In a fun twist, the generated response typically included unexpected features such as chaining a command to make the output human-friendly.
 
 ## Key Features
 
