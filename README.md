@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repo is not maintained since June, 2020 and is being archived.
+
 # Abby Generative AI Console Copilot (2020)
 
 ![image](demo_output/show-ip-comms.png)
